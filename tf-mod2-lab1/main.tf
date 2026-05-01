@@ -47,7 +47,7 @@ resource "google_compute_subnetwork" "tf-mod2-lab1-sub2" {
 }
 
 resource "google_compute_subnetwork" "tf-mod2-lab1-sub3" {
-  name          = "tf-mod2-lab1-sub2"
+  name          = "tf-mod2-lab1-sub3"
   ip_cidr_range = "10.0.3.0/24"
   region        = "us-central1"
   network       = google_compute_network.tf-mod2-lab1-vpc2.id
@@ -76,9 +76,9 @@ resource "google_compute_firewall" "tf-mod2-lab1-fwrule1" {
 
 // vpc2 firewall rule
 //https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_firewall
-resource "google_compute_firewall" "tf-mod2-lab1-fwrule1" {
+resource "google_compute_firewall" "tf-mod2-lab1-fwrule2" {
   project = "tf-mod2-lab1-495015"
-  name        = "tf-mod2-lab1-fwrule1"
+  name        = "tf-mod2-lab1-fwrule2"
   network     = "tf-mod2-lab1-vpc2"
   // need the network created before the firewall rule
   // I noticed sometimes terraform didn't detect the dependency, so making explicit.
@@ -101,14 +101,14 @@ resource "google_compute_instance" "tf-mod2-lab1-vm1" {
   name = "tf-mod2-lab1-vm1"
   machine_type = "e2-micro"
   zone = "us-central1-a"  
-  depends_on = [google_compute_network.tf-mod2-lab1-vpc1, google_compute_subnetwork.tf-mod2-lab1-subnet1]
+  depends_on = [google_compute_network.tf-mod2-lab1-vpc1, google_compute_subnetwork.tf-mod2-lab1-sub1]
   network_interface {
     // This indicates to give a public IP address
     access_config {
       network_tier = "STANDARD"
     }
     network = "tf-mod2-lab1-vpc1"
-    subnetwork = "tf-mod2-lab1-subnet1"
+    subnetwork = "tf-mod2-lab1-sub1"
   }
 
   boot_disk {
@@ -126,14 +126,14 @@ resource "google_compute_instance" "tf-mod2-lab1-vm2" {
   name = "tf-mod2-lab1-vm2"
   machine_type = "e2-micro"
   zone = "us-central1-a"  
-  depends_on = [google_compute_network.tf-mod2-lab1-vpc2, google_compute_subnetwork.tf-mod2-lab1-subnet2]
+  depends_on = [google_compute_network.tf-mod2-lab1-vpc2, google_compute_subnetwork.tf-mod2-lab1-sub2]
   network_interface {
     // This indicates to give a public IP address
     access_config {
       network_tier = "STANDARD"
     }
     network = "tf-mod2-lab1-vpc2"
-    subnetwork = "tf-mod2-lab1-subnet2"
+    subnetwork = "tf-mod2-lab1-sub2"
   }
 
   boot_disk {
@@ -151,14 +151,14 @@ resource "google_compute_instance" "tf-mod2-lab1-vm3" {
   name = "tf-mod2-lab1-vm3"
   machine_type = "e2-micro"
   zone = "us-central1-a"  
-  depends_on = [google_compute_network.tf-mod2-lab1-vpc2, google_compute_subnetwork.tf-mod2-lab1-subnet2]
+  depends_on = [google_compute_network.tf-mod2-lab1-vpc2, google_compute_subnetwork.tf-mod2-lab1-sub2]
   network_interface {
     // This indicates to give a public IP address
     access_config {
       network_tier = "STANDARD"
     }
     network = "tf-mod2-lab1-vpc2"
-    subnetwork = "tf-mod2-lab1-subnet2"
+    subnetwork = "tf-mod2-lab1-sub2"
   }
 
   boot_disk {
@@ -176,14 +176,14 @@ resource "google_compute_instance" "tf-mod2-lab1-vm4" {
   name = "tf-mod2-lab1-vm4"
   machine_type = "e2-micro"
   zone = "us-central1-a"  
-  depends_on = [google_compute_network.tf-mod2-lab1-vpc2, google_compute_subnetwork.tf-mod2-lab1-subnet3]
+  depends_on = [google_compute_network.tf-mod2-lab1-vpc2, google_compute_subnetwork.tf-mod2-lab1-sub3]
   network_interface {
     // This indicates to give a public IP address
     access_config {
       network_tier = "STANDARD"
     }
     network = "tf-mod2-lab1-vpc2"
-    subnetwork = "tf-mod2-lab1-subnet3"
+    subnetwork = "tf-mod2-lab1-sub3"
   }
 
   boot_disk {
