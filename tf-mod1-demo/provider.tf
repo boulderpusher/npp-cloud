@@ -1,7 +1,7 @@
 provider "google" {
-  credentials = file("FILL-IN.json")
+  credentials = file("/home/ben/mscs/linux-networking/cloud-networking-494920-af518f334bda.json")
 
-  project = "FILL-IN"
+  project = "cloud-networking-494920"
   region  = "us-central1"  // default
   zone    = "us-central1-c"  // default
 }
